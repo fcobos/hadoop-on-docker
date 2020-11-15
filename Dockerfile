@@ -5,7 +5,7 @@ ARG HADOOP_VERSION=3.3.0
 USER root
 
 RUN dnf upgrade --refresh -y
-RUN dnf install -y sudo openssh-server openssh-clients rsync net-tools lsof bc jq java-11-openjdk-headless
+RUN dnf install -y ncurses sudo openssh-server openssh-clients rsync net-tools lsof bc jq java-11-openjdk-headless
 RUN dnf clean all
 
 RUN mkdir /tmp/hadoop && \
