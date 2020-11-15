@@ -4,7 +4,7 @@ ARG HADOOP_VERSION=3.3.0
 
 USER root
 
-RUN apk --no-cache add curl tar sudo openssh-server rsync net-tools findutils less lsof vim bc jq \
+RUN apk --no-cache add bash curl tar sudo openssh-server rsync net-tools findutils less lsof vim bc jq \
     openjdk11-jre-headless
 
 RUN mkdir /tmp/hadoop && \
