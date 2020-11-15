@@ -4,9 +4,9 @@ ARG HADOOP_VERSION=3.3.0
 
 USER root
 
-RUN yum upgrade --refresh -y
-RUN yum install -y sudo openssh-server rsync net-tools lsof bc jq java-11-openjdk-headless
-RUN yum clean all
+RUN dnf upgrade --refresh -y
+RUN dnf install -y sudo openssh-server openssh-clients rsync net-tools lsof bc jq java-11-openjdk-headless
+RUN dnf clean all
 
 RUN mkdir /tmp/hadoop && \
     curl -s https://archive.apache.org/dist/hadoop/common/hadoop-${HADOOP_VERSION}/hadoop-${HADOOP_VERSION}.tar.gz | \
