@@ -1,20 +1,11 @@
-FROM ubuntu
+FROM alpine
 
-ARG HADOOP_VERSION=3.1.2
+ARG HADOOP_VERSION=3.3.0
 
 USER root
 
-RUN apt-get -y update
-
-RUN apt-get install -y curl tar sudo openssh-server rsync hostname net-tools findutils less lsof vim bc jq
-
-RUN apt-get install -y software-properties-common \
-    && echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | debconf-set-selections \
-    && add-apt-repository -y ppa:webupd8team/java \
-    && apt-get update \
-    && apt-get install -y oracle-java8-installer \
-    && rm -rf /var/lib/apt/lists/* \
-    && rm -rf /var/cache/oracle-jdk8-installer
+RUN apk --no-cache add curl tar sudo openssh-server rsync net-tools findutils less lsof vim bc jq \
+    openjdk11-jre-headless
 
 RUN mkdir /tmp/hadoop && \
     curl -s https://archive.apache.org/dist/hadoop/common/hadoop-${HADOOP_VERSION}/hadoop-${HADOOP_VERSION}.tar.gz | \
@@ -34,7 +25,7 @@ ENV HADOOP_MAPRED_HOME=/usr/local/hadoop
 ENV HADOOP_YARN_HOME=/usr/local/hadoop
 ENV HADOOP_CONF_DIR=/usr/local/hadoop/etc/hadoop
 ENV YARN_CONF_DIR=/usr/local/hadoop/etc/hadoop
-ENV JAVA_HOME /usr/lib/jvm/java-8-oracle
+ENV JAVA_HOME=/usr/lib/jvm/java-11-openjdk
 
 EXPOSE 8030/tcp 8031/tcp 8032/tcp 8033/tcp 8040/tcp 8042/tcp 8088/tcp
 
