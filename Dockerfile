@@ -1,11 +1,11 @@
-FROM alpine
+FROM centos:8
 
-ARG HADOOP_VERSION=3.1.4
+ARG HADOOP_VERSION=3.3.0
 
 USER root
 
-RUN apk --no-cache add bash curl tar sudo openssh-server rsync net-tools findutils less lsof vim bc jq \
-    openjdk11-jre-headless
+RUN yum install -y sudo openssh-server rsync net-tools lsof bc jq java-11-openjdk-headless
+RUN yum clean all
 
 RUN mkdir /tmp/hadoop && \
     curl -s https://archive.apache.org/dist/hadoop/common/hadoop-${HADOOP_VERSION}/hadoop-${HADOOP_VERSION}.tar.gz | \
@@ -25,7 +25,7 @@ ENV HADOOP_MAPRED_HOME=/usr/local/hadoop
 ENV HADOOP_YARN_HOME=/usr/local/hadoop
 ENV HADOOP_CONF_DIR=/usr/local/hadoop/etc/hadoop
 ENV YARN_CONF_DIR=/usr/local/hadoop/etc/hadoop
-ENV JAVA_HOME=/usr/lib/jvm/java-11-openjdk
+ENV JAVA_HOME=/usr/lib/jvm/jre-11-openjdk
 
 EXPOSE 8030/tcp 8031/tcp 8032/tcp 8033/tcp 8040/tcp 8042/tcp 8088/tcp
 
