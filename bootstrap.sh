@@ -46,7 +46,7 @@ then
 fi
 
 TOTAL_CPU=$(cat /proc/cpuinfo | grep "processor" | wc -l)
-TOTAL_MEM=$(free --mega | grep Mem | awk '{ print $2 }')
+TOTAL_MEM=$(free -m | grep Mem | awk '{ print $2 }')
 
 MAX_CPU=$(echo "${MAX_CPU_PERC} * ${TOTAL_CPU} / 100" | bc)
 MIN_CPU=1
