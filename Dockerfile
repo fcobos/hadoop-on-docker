@@ -4,6 +4,7 @@ ARG HADOOP_VERSION=3.3.0
 
 USER root
 
+RUN yum upgrade --refresh -y
 RUN yum install -y sudo openssh-server rsync net-tools lsof bc jq java-11-openjdk-headless
 RUN yum clean all
 
