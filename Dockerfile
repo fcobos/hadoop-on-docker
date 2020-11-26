@@ -9,7 +9,7 @@ RUN dnf install -y ncurses sudo openssh-server openssh-clients rsync net-tools l
 RUN dnf clean all
 
 RUN mkdir /tmp/hadoop && \
-    curl -s https://archive.apache.org/dist/hadoop/common/hadoop-${HADOOP_VERSION}/hadoop-${HADOOP_VERSION}.tar.gz | \
+    curl -s https://archive.apache.org/dist/hadoop/common/hadoop-${HADOOP_VERSION}/hadoop-${HADOOP_VERSION}-aarch64.tar.gz | \
     tar -xz -C /tmp/hadoop --exclude='share/doc' && \
     mv -v /tmp/hadoop/hadoop-${HADOOP_VERSION} /usr/local/hadoop-${HADOOP_VERSION} && \
     cd /usr/local && ln -s ./hadoop-${HADOOP_VERSION} hadoop
